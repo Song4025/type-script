@@ -141,11 +141,11 @@ function Coin (){
   const [coins, setCoins]= useState<CoinInterface[]>([]);
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
+  const priceMatch = useRouteMatch("/:coinId/price");
+  const chartMatch = useRouteMatch("/:coinId/chart");
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState<InfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
-  const priceMatch = useRouteMatch("/:coinId/price");
-  const chartMatch = useRouteMatch("/:coinId/chart");
 
   useEffect(()=>{
     (async()=>{
