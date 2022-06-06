@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch} from 'react-router-dom';
 import styled from 'styled-components';
+import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
 
@@ -138,12 +140,14 @@ const Tab = styled.span<{ isActive: boolean }>`
 `;
 
 function Coin (){
-  const [coins, setCoins]= useState<CoinInterface[]>([]);
+
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
-  const [loading, setLoading] = useState(true);
+  const {} = useQuery(["info",coinId], () => fetchCoinInfo(coinId))
+  const {} = useQuery(["tickers",coinId], () => fetchCoinTickers(coinId))
+  /* const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState<InfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
 
@@ -161,7 +165,7 @@ function Coin (){
     setPriceInfo(priceData);
     setLoading(false);
     })();
-  }, [coinId]);
+  }, [coinId]); */
 
   return <Container>
   <Header>
@@ -219,4 +223,4 @@ function Coin (){
     </Container>;
 }
 
-export default Coin;
+export default Coin; 
