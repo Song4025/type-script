@@ -145,8 +145,8 @@ function Coin (){
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
-  const {} = useQuery(["info",coinId], () => fetchCoinInfo(coinId))
-  const {} = useQuery(["tickers",coinId], () => fetchCoinTickers(coinId))
+  const {isLoading: infoLoading} = useQuery(["info",coinId], () => fetchCoinInfo(coinId))
+  const {isLoading: tickerLaoding}  = useQuery(["tickers",coinId], () => fetchCoinTickers(coinId))
   /* const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState<InfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
