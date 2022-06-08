@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { fatchCoins } from "../api";
+import { fetchCoins } from "../api";
 
 const Container = styled.div`
     padding:0px 20px;
@@ -66,7 +66,7 @@ const Img = styled.img`
   }
 
 function Coins (){
-    const { isLoading, data } = useQuery<ICoin[]>("allCoins", fatchCoins)
+    const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins)
     /* const [coins, setCoins]= useState<CoinInterface[]>([]);
     const [loading, setLoading] = useState(true);
     useEffect(()=>{
