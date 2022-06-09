@@ -19,8 +19,6 @@ function Chart({ coinId }: ChartProps) {
   const { isLoading, data } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
-  console.log(data);
-
   return(
     <div>
       {isLoading ? (
@@ -59,17 +57,17 @@ function Chart({ coinId }: ChartProps) {
               axisTicks: { show: false },
               labels: { show: false },
               type: "datetime",
-              categories: data?.map(price => price.time_close)??[],
+              categories: data?.map((price) => price.time_close),
             },
-            fill:{
+            fill: {
               type: "gradient",
-              gradient:{ gradientToColors: ["#ee5253"], },
+              gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
             },
-            colors: ["#5f27cd"],
+            colors: ["#0fbcf9"],
             tooltip: {
               y: {
-                formatter: (value) => `$ ${value.toFixed(2)}`
-              }  
+                formatter: (value) => `$${value.toFixed(2)}`,
+              },
             }
           }}
         />
