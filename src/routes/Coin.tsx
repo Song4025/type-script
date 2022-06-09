@@ -79,23 +79,32 @@ interface PriceData {
 }
 
 const Container = styled.div`
-    padding:0px 20px;
-    max-width: 480px;
-    margin: 0 auto;
+  padding:0px 20px;
+  max-width: 480px;
+  margin: 0 auto;
 `;
 const Header = styled.header`
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const Title = styled.h1`
-    font-size: 48px;
-    color:${props => props.theme.accentColor};
+  font-size: 48px;
+  color:${props => props.theme.accentColor};
 `;
 const Loader = styled.span`
-    text-align: center;
-    display: block;
+  text-align: center;
+  display: block;
+`;
+const BtnBack = styled.div`
+  text-align: center;
+  padding-bottom: 20px;
+  a {
+    background: #10ac84;
+    border-radius: 8px;
+    padding: 3px 6px;
+  }
 `;
 const Overview = styled.div`
   display: flex;
@@ -186,6 +195,9 @@ function Coin (){
       <Loader>Loading...</Loader>
   ) : (
     <>
+      <BtnBack>
+        <a href="http://localhost:3000">Home</a>
+      </BtnBack>
       <Overview>
         <OverviewItem>
           <span>Rank:</span>
@@ -223,7 +235,7 @@ function Coin (){
 
       <Switch>
         <Route path={`/:coinId/price`}>
-          <Price />
+          <Price coinId={coinId}/>
         </Route>
         <Route path={`/:coinId/chart`}>
           <Chart coinId={coinId} />
