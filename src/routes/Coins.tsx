@@ -23,7 +23,7 @@ const CoinsList = styled.ul`
 
 const Coin = styled.li`
     background: white;
-    color:${props => props.theme.bgColor};
+    color:${props => props.theme.textColor};
     border-radius: 15px;
     margin-bottom: 10px;
     a{
@@ -55,7 +55,7 @@ const Img = styled.img`
     margin-right: 10px;
 `;
 
-  interface ICoin {
+interface ICoin {
     id: string,
     name: string,
     symbol: string,
@@ -63,9 +63,13 @@ const Img = styled.img`
     is_new: boolean,
     is_active: boolean,
     type: string,
-  }
+}
 
-function Coins (){
+interface ICoinsProps {
+  toggleDark: () => void;
+}
+
+function Coins({toggleDark}: ICoinsProps){
     const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins)
     /* const [coins, setCoins]= useState<CoinInterface[]>([]);
     const [loading, setLoading] = useState(true);
@@ -80,12 +84,11 @@ function Coins (){
     },[]); */
     return <Container>
         <Helmet>
-            <title>
-                코인
-            </title>
+            <title>코인</title>
         </Helmet>
         <Header>
             <Title>코인</Title>
+            <button onClick={toggleDark}>Toggle Dark Mode</button>
         </Header>
         {isLoading ? (
             <Loader>Loading...</Loader>

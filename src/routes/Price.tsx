@@ -1,10 +1,6 @@
 import { useQuery } from "react-query";
 import { fetchCoinTickers } from "../api";
 
-interface ChartProps {
-  coinId: string;
-}
-
 interface PriceData {
   id: string;
   name: string;
@@ -38,7 +34,11 @@ interface PriceData {
     };
   };
 }
-function Price({ coinId }: ChartProps) {
+interface PriceProps {
+  coinId: string;
+}
+
+function Price({ coinId }: PriceProps) {
   const {isLoading: tickerLaoding, data: tickersData}  = useQuery<PriceData>(
     ["tickers",coinId],
     () => fetchCoinTickers(coinId),

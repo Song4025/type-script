@@ -1,7 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 import './App.css';
 import Router from './Router';
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './theme';
+import { useState } from 'react';
+import { ModifierFlags } from 'typescript';
 
 const GlobalStyle = createGlobalStyle`
 <style>
@@ -69,14 +73,22 @@ a {
 `;
 
 function App() {
-
+  const [isDark, setIsDark] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const toggleDark = () => setIsDark((current) => !current);
   return (
     <>
+    <ThemeProvider theme={ isDark ? darkTheme : lightTheme }>
+      <button onClick={toggleDark}>Toggle Mode</button>
     <GlobalStyle />
-    <Router />
+    <Router isDark={isDark} toggleDark={toggleDark}/>
     <ReactQueryDevtools initialIsOpen={true} />
+    </ThemeProvider>
     </>
   )
 }
 
+// App (isDark, ModifierFn)
+// -> Router -> Coins (modifier)
+// -> Router -> Coin -> Chart(isDark)
 export default App;
